@@ -37,6 +37,9 @@ git clone https://github.com/dark-kingA/superSearh.git
 ## 其他问题
 部分师傅安装后可能出现插件异常 打不开插件页面 更新chrome浏览器
 作者本地版本 版本 106.0.5249.91（正式版本） (arm64)
-# 技术交流
+## 技术交流
 欢迎各位师傅提意见及技术交流等
 ![alt](./figure/wx.jpeg)
+## 人员
+感谢五六七安全团队团长m0be1的细节 板块 优化
+
