@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "superSearch",
+  "version": "1.0",
+  "description": "帮助安全人员快速提供信收插件 by 不懂安全的开发",
+  "icons": {
+    "16": "./img/icon-32.png",
+    "128": "./img/icon-64.png",
+    "48": "./img/icon-64.png"
+  },
+  "action": {
+    "default_title": "superSearch",
+    "default_icon": "./img/icon-32.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "js/index.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
