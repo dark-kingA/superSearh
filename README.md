@@ -36,6 +36,7 @@ git clone https://github.com/dark-kingA/superSearh.git
 直接将解压后的文件拖进去即可使用
 ## 其他问题
 部分师傅安装后可能出现插件异常 打不开插件页面 更新chrome浏览器
+作者本地版本 版本 106.0.5249.91（正式版本） (arm64)
 # 技术交流
 欢迎各位师傅提意见及技术交流等
 ![alt](./figure/wx.jpeg)
