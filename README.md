@@ -6,6 +6,7 @@
 
 # 插件详情
 辅助安全人员快速查找所需信息
+![alt](./figure/demo7.png)
 
 ## 提取当前tab的url
 ![alt](./figure/demo1.png)
