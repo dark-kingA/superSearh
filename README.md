@@ -33,6 +33,8 @@
 git clone https://github.com/dark-kingA/superSearh.git
 解压后打开chrome://extensions/ 
 直接将解压后的文件拖进去即可使用
+## 其他问题
+部分师傅安装后可能出现插件异常 打不开插件页面 更新chrome浏览器
 # 技术交流
 欢迎各位师傅提意见及技术交流等
 ![alt](./figure/wx.jpeg)
