@@ -23,6 +23,7 @@
 
 ## 配置文件
 零零信安 zoneKey需要申请 每天只能申请一次 key的时效是永久的
+申请地址 https://0.zone/applyParticulars?type=site
 ![alt](./figure/demo5.png)
 
 ## ip反查域名
