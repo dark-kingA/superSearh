@@ -329,7 +329,7 @@ $(function () {
                                 htmlFofa += "</div>"
                             }
                             // 存储json数据
-                            fofaData.ip = ip
+                            fofaData.ip = fofaIp
                             fofaData.port = fofaPort
                             fofaData.statusCode = fofastatusCode
                             fofaData.agreementName = fofaAgreementName
