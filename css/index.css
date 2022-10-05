@@ -73,6 +73,7 @@ body {
     position: relative;
     padding-top: 10px;
     padding-bottom: 10px;
+    display: flex;
 }
 
 .title::before {
@@ -184,6 +185,22 @@ body {
     margin-left: 8px;
 }
 .button-item:hover{
+    background: #005cb6;
+    color: #ffffff;
+}
+.toExcle{
+    width: 70px;
+    background: #eaf2f7;
+    margin-left: 20px;
+    text-align: center;
+    height: 30px;
+    color: #1257ad;
+    line-height: 30px;
+    font-size: 13px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.toExcle:hover{
     background: #005cb6;
     color: #ffffff;
 }

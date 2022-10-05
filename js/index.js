@@ -16,15 +16,6 @@ $(function () {
             }
             init(url)
         });
-        // 废弃 2的写法
-        // chrome.tabs.getSelected(null, function (tab) {
-        //     let url = tab.url
-        //     if (url.indexOf('chrome://') === 0) {
-        //         toast("当前url无效", 2000, 'red', '#ffffff')
-        //         return
-        //     }
-        //     init(url)
-        // });
         $('#checkTab1').click(function () {
             let className = $('#checkTab1').attr("class");
             if (className == 'buttonTabDefault') {
@@ -132,7 +123,7 @@ $(function () {
             });
 
         })
-        // 保存配置
+        // 零零信安保存配置
         $('#saveZoneKeyBtn').click(function () {
             let zoneKey = $('#saveZoneKeyVal').val()
             if (!checkParam(zoneKey)) {
@@ -142,6 +133,40 @@ $(function () {
             chrome.storage.sync.set({zoneKey: zoneKey}, function () {
                 toast("保存成功", 2000, 'blue', '#ffffff')
             });
+        })
+
+        // fofa保存配置
+        $('#saveFofaBtn').click(function () {
+            let fofaKey = $('#saveFofaVal').val()
+            if (!checkParam(fofaKey)) {
+                toast("请输入fofaKey", 2000, 'red', '#ffffff')
+                return
+            }
+            chrome.storage.sync.set({fofaKey: fofaKey}, function () {
+                toast("保存成功", 2000, 'blue', '#ffffff')
+            });
+        })
+        // fofaToExcle
+        $('#fofaToExcle').click(function () {
+            let str = `ip/域名,端口号,状态码,协议,国家,标题,服务名称,更新时间\n`;
+            let jsonData = $('#fofaHideData').text().trim()
+            if (jsonData && jsonData.length > 0) {
+                toast("导出数据中", 1000, 'blue', '#ffffff')
+                toExcel(JSON.parse(jsonData), str, "fofa")
+            } else {
+                toast("没有数据", 1000, 'red', '#ffffff')
+            }
+        })
+        // llxaToExcle
+        $('#llxaToExcle').click(function () {
+            let str = `标题,url,ip,系统,cms,端口号,公司,标签\n`;
+            let jsonData = $('#llxaHideData').text().trim()
+            if (jsonData && jsonData.length > 0) {
+                toast("导出数据中", 1000, 'blue', '#ffffff')
+                toExcel(JSON.parse(jsonData), str, "llxa")
+            } else {
+                toast("没有数据", 1000, 'red', '#ffffff')
+            }
         })
 
         /**
@@ -268,6 +293,7 @@ $(function () {
                         var html = $(res);
                         let content = html.find(".result-item .rightListsMain")
                         for (let i = 0; i < content.length; i++) {
+                            let fofaData = {}
                             let ip = $(content[i]).find("div.addrLeft > span.aSpan").text()
                             let fofaIp = ip.trim()
                             let portData = $(content[i]).find("div.addrRight > a.portHover")
@@ -302,7 +328,18 @@ $(function () {
                                 htmlFofa += "<div class='item-one' style='width: 110px;'><span>" + fofaServeName + "</span></div>"
                                 htmlFofa += "</div>"
                             }
+                            // 存储json数据
+                            fofaData.ip = ip
+                            fofaData.port = fofaPort
+                            fofaData.statusCode = fofastatusCode
+                            fofaData.agreementName = fofaAgreementName
+                            fofaData.countryName = fofaCountryName
+                            fofaData.titleName = fofaTitleName
+                            fofaData.serveName = fofaServeName
+                            fofaData.updateTime = fofaUpdateTime
+                            result.push(fofaData)
                         }
+                        $('#fofaHideData').text(JSON.stringify(result))
                     }
                     $('#fofaContent').html(htmlFofa)
                 }, error: function (err) {
@@ -419,10 +456,12 @@ $(function () {
                     dataType: "json",
                     success: function (res) {
                         if (res.code == 0) {
+                            let resultData = []
                             let htmlLLXA = ""
                             var data = res.data
                             if (data.length > 0) {
                                 for (let i = 0; i < data.length; i++) {
+                                    let llxaData = {}
                                     htmlLLXA += "<div class='LLXA-item'>"
                                     if (i == 0) {
                                         htmlLLXA += "<div class='item-two item-title' style='width: 110px;'>标题</div>"
@@ -432,6 +471,15 @@ $(function () {
                                         htmlLLXA += "<div class='item-two item-title' style='width: 110px;'>设备分类</div>"
                                         htmlLLXA += "</div>"
                                     } else {
+                                        llxaData.title = data[i].title
+                                        llxaData.url = data[i].url
+                                        llxaData.ip = data[i].ip
+                                        llxaData.os = data[i].os
+                                        llxaData.cms = data[i].cms
+                                        llxaData.port = data[i].port
+                                        llxaData.company = data[i].company
+                                        llxaData.tags = JSON.stringify(data[i].tags)
+                                        resultData.push(llxaData)
                                         htmlLLXA += "<div class='item-two' style='width: 110px;'><span>" + data[i].title + "</span></div>"
                                         htmlLLXA += "<div class='item-two' style='width: 180px;'><span>" + data[i].url + "</span></div>"
                                         htmlLLXA += "<div class='item-two' style='width: 110px;'><span>" + data[i].os + "</span></div>"
@@ -440,6 +488,7 @@ $(function () {
                                         htmlLLXA += "</div>"
                                     }
                                 }
+                                $('#llxaHideData').text(JSON.stringify(resultData))
                             }
                             $('#LLXAContent').html(htmlLLXA)
                         } else {
@@ -537,6 +586,26 @@ $(function () {
                     return false;
                 }
             }
+        }
+
+        /**
+         * 导出excle
+         * @param jsonData 数据
+         * @param str 字段名 逗号分割
+         * @param excleName 文件名称
+         */
+        function toExcel(jsonData, str, excleName) {
+            for (let i = 0; i < jsonData.length; i++) {
+                for (const key in jsonData[i]) {
+                    str += `${jsonData[i][key] + '\t'},`;
+                }
+                str += '\n';
+            }
+            const uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+            const link = document.createElement("a");
+            link.href = uri;
+            link.download = excleName + ".csv";
+            link.click();
         }
     }
 )

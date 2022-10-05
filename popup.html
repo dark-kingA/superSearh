@@ -61,7 +61,8 @@
         <!--fofa-->
         <div id="main-item2">
             <div class="item2">
-                <div class="title"><span>资产信息</span></div>
+                <div class="title"><span>资产信息</span><div class="toExcle" id="fofaToExcle">导出</div></div>
+                <div id="fofaHideData" style="display: none"></div>
                 <div class="item1">
                     <div class="fofaContent" id="fofaContent">
                     </div>
@@ -78,26 +79,29 @@
         </div>
         <!--零零信安查询-->
         <div id="main-item4">
-            <div class="title"><span id="llxaTitle">信息系统</span></div>
+            <div class="title"><span id="llxaTitle">信息系统</span><div class="toExcle" id="llxaToExcle">导出</div></div>
+            <div id="llxaHideData" style="display: none"></div>
             <div class="item1">
                 <div class="LLXAContent" id="LLXAContent"></div>
             </div>
         </div>
-    </div>
-    <!--配置-->
-    <div id="main-item5">
-        <div class="title"><span>配置项</span></div>
-        <div class="item1">
-            <div class="setting-content">
-                <div class="item-setting">
-                    <div class="titel">
-                        <span>零零信安zone_key_id：</span>
-                        <input type="text" class="input-item" id="saveZoneKeyVal">
-                        <div class="button-item" id="saveZoneKeyBtn">保存</div>
+        <!--配置-->
+        <div id="main-item5">
+            <div class="title"><span>配置项</span></div>
+            <div class="item1">
+                <div class="setting-content">
+                    <div class="item-setting">
+                        <div class="titel">
+                            <span>零零信安zone_key_id：</span>
+                            <input type="text" class="input-item" id="saveZoneKeyVal">
+                            <div class="button-item" id="saveZoneKeyBtn">保存</div>
+<!--                            <span>fofaApi-key：</span>-->
+<!--                            <input type="text" class="input-item" id="saveFofaVal">-->
+<!--                            <div class="button-item" id="saveFofaBtn">保存</div>-->
+                        </div>
                     </div>
 
                 </div>
-
             </div>
         </div>
     </div>
