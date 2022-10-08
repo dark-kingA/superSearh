@@ -45,7 +45,37 @@ $(function () {
                 $('#checkTab2').attr("class", "checkButtonTab");
                 $('#checkTab4').attr("class", "buttonTabDefault");
                 $('#checkTab5').attr("class", "buttonTabDefault");
+                $('#checkTab6').attr("class", "checkButtonTab");
+
                 $('#main-item1').hide();
+                $('#asset2').hide()
+                $('#asset1').show()
+                $('#main-item2').show();
+                $('#main-item3').hide();
+                $('#main-item4').hide();
+                $('#main-item5').hide();
+            }
+        })
+        $('#checkTab6').click(function () {
+            let className = $('#checkTab6').attr("class");
+            if (className == 'buttonTabDefault') {
+                // 调用fofa查询
+                let fofaContent = $('#fofaContent').text().trim()
+                toast("fofa查询中...", 1000, '#005cb6', '#ffffff')
+                if (fofaContent == null || fofaContent == '') {
+                    fofaQuery($('#IP').text().trim());
+                }
+                $('#checkTab4').attr("class", "buttonTabDefault");
+                $('#checkTab6').attr("class", "checkButtonTab");
+
+                $('#checkTab1').attr("class", "buttonTabDefault");
+                $('#checkTab3').attr("class", "buttonTabDefault");
+                $('#checkTab2').attr("class", "checkButtonTab");
+                $('#checkTab4').attr("class", "buttonTabDefault");
+                $('#checkTab5').attr("class", "buttonTabDefault");
+                $('#main-item1').hide();
+                $('#asset2').hide()
+                $('#asset1').show()
                 $('#main-item2').show();
                 $('#main-item3').hide();
                 $('#main-item4').hide();
@@ -70,16 +100,19 @@ $(function () {
         })
 
         $('#checkTab4').click(function () {
-            $('#checkTab1').attr("class", "buttonTabDefault");
-            $('#checkTab3').attr("class", "buttonTabDefault");
-            $('#checkTab2').attr("class", "buttonTabDefault");
+            // $('#checkTab1').attr("class", "buttonTabDefault");
+            // $('#checkTab3').attr("class", "buttonTabDefault");
+            // $('#checkTab2').attr("class", "buttonTabDefault");
             $('#checkTab4').attr("class", "checkButtonTab");
-            $('#checkTab5').attr("class", "buttonTabDefault");
+            $('#checkTab6').attr("class", "buttonTabDefault");
+            // $('#checkTab5').attr("class", "buttonTabDefault");
             $('#main-item1').hide();
-            $('#main-item2').hide();
+            // $('#main-item2').hide();
             $('#main-item3').hide();
-            $('#main-item4').show();
+            // $('#main-item4').show();
             $('#main-item5').hide();
+            $('#asset2').show()
+            $('#asset1').hide()
             toast("零零信安查询中...", 1000, '#005cb6', '#ffffff')
             let company = $('#icp_company').text().trim()
             let IP = $('#IP').text().trim()
@@ -283,6 +316,7 @@ $(function () {
                 return
             }
             let data = 'ip="' + host + '"'
+            $('#fofaTitle').text("资产信息  " + data + "")
             let url = 'https://fofa.info/result?qbase64=' + btoa(data)
             $.ajax({
                 url: url, type: 'GET', async: false, headers: headers, success: function (res) {
@@ -442,10 +476,10 @@ $(function () {
             if (checkParam(param) && checkParam(zoneKey)) {
                 let url = 'https://0.zone/api/data/'
                 let data = {
-                    "title": param,
+                    "title": param.trim(),
                     "title_type": "site",
                     "page": 1,
-                    "pagesize": 10,
+                    "pagesize": 20,
                     "zone_key_id": zoneKey
                 }
                 $('#llxaTitle').text("信息系统  " + data.title + "")
@@ -489,6 +523,8 @@ $(function () {
                                     }
                                 }
                                 $('#llxaHideData').text(JSON.stringify(resultData))
+                            }else{
+                                toast("暂无数据", 2000, 'red', '#ffffff')
                             }
                             $('#LLXAContent').html(htmlLLXA)
                         } else {
@@ -496,7 +532,7 @@ $(function () {
                         }
                     },
                     error: function (err) {
-                        toast(JSON.stringify("查询失败"), 2000, 'red', '#ffffff')
+                        toast("查询失败", 2000, 'red', '#ffffff')
                     }
                 })
             }
