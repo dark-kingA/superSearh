@@ -35,11 +35,7 @@ $(function () {
             let className = $('#checkTab2').attr("class");
             if (className == 'buttonTabDefault') {
                 // 调用fofa查询
-                let fofaContent = $('#fofaContent').text().trim()
-                toast("fofa查询中...", 1000, '#005cb6', '#ffffff')
-                if (fofaContent == null || fofaContent == '') {
-                    fofaQuery($('#IP').text().trim());
-                }
+                fofaQuery($('#IP').text().trim());
                 $('#checkTab1').attr("class", "buttonTabDefault");
                 $('#checkTab3').attr("class", "buttonTabDefault");
                 $('#checkTab2').attr("class", "checkButtonTab");
@@ -306,6 +302,11 @@ $(function () {
          * @param host
          */
         function fofaQuery(host) {
+            // let fofaContent = $('#fofaContent').text().trim()
+            toast("fofa查询中...", 1000, '#005cb6', '#ffffff')
+            // if (fofaContent == null || fofaContent != '') {
+            //     return;
+            // }
             // 校验数据
             if (host == null || host == "") {
                 return
