@@ -1,4 +1,5 @@
 # superSearh 1.0(该版本仓库已经不在维护 正在开发新版 全新ui)
+## 移步 https://github.com/dark-kingA/superSearchPlus
 帮助安全人员快速提供信息收集插件（插件响应速度取决于你当前的网速）by 不懂安全的开发
 开科学上网的插件的响应速度慢！！！！！
 
